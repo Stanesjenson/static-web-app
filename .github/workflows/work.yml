@@ -1,0 +1,29 @@
+# .github/workflows/deploy-azure-university-login.yml
+
+name: Deploy Azure University Login Page
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'path/to/your/html/file.html'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        uses: Cyb3r-Jak3/html5validator-action@v2
+        with:
+          file: path/to/your/html/file.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./path/to/your/html/
